@@ -1,40 +1,52 @@
 Promise.all([d3.json("https://api.data.gov.sg/v1/environment/psi")]).then((data) => {
 
-
-    let tiles = new L.tileLayer('https://maps-{s}.onemap.sg/v3/Default/{z}/{x}/{y}.png', {
-    detectRetina: true,
-    maxZoom: 18,
-    minZoom: 11,
-    //Do not remove this attribution
-    attribution: '<img src="https://docs.onemap.sg/maps/images/oneMap64-01.png" style="height:0px;width:0px;">' +
-                'New OneMap | Map data © contributors, <a href="http://SLA.gov.sg">Singapore Land Authority</a>'
-    });
-    let map = new L.Map("map", {
-        center: [1.347833, 103.809357], 
-        zoom: 11,
-        maxBounds: L.latLngBounds(L.latLng(1.1, 103.5), L.latLng(1.5, 104.3))
-        })
-        .addLayer(tiles);
-                        
     
+    var center = L.bounds([1.56073, 104.11475], [1.16, 103.502]).getCenter();
+    var map = L.map('map').setView([center.x, center.y], 12);
+    
+    var basemap = L.tileLayer('https://maps-{s}.onemap.sg/v3/Default/{z}/{x}/{y}.png', {
+        detectRetina: true,
+        maxZoom: 18,
+        minZoom: 11
+      });
 
-    var marker = L.marker([51.5, -0.09]).addTo(map);
-    var circle = L.circle([51.508, -0.11], {
-        color: 'red',
-        fillColor: '#f03',
-        fillOpacity: 0.5,
-        radius: 500
-    }).addTo(map);
+    map.setMaxBounds([[1.56073, 104.1147], [1.16, 103.502]]);
 
-    var polygon = L.polygon([
-        [51.509, -0.08],
-        [51.503, -0.06],
-        [51.51, -0.047]
-    ]).addTo(map);
-
-    marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
-    circle.bindPopup("I am a circle.");
-    polygon.bindPopup("I am a polygon.");
-
-
+    basemap.addTo(map);
+    var metrics = Object.values(data[0].region_metadata); 
+    var lenOfData = metrics.length;
+    west = 0;
+    national = 0;
+    east = 0;
+    central = 0;
+    south = 0;
+    north = 0;
+    psi_type = ["pm25_sub_index"]
+    psi_type.forEach(element => {
+        console.log(data[0].items[0].readings[element])
+        west = (data[0].items[0].readings[element]).west
+        national = (data[0].items[0].readings[element]).national
+        east = (data[0].items[0].readings[element]).east
+        central = (data[0].items[0].readings[element]).central
+        south = (data[0].items[0].readings[element]).south
+        north = (data[0].items[0].readings[element]).north
+    });
+    region = []
+    region.push(west)
+    region.push(national)
+    region.push(east)
+    region.push(central)
+    region.push(south)
+    region.push(north)
+    for (var i=0; i<lenOfData; i++){
+        var coords =  metrics[i].label_location;
+        console.log(coords)
+        var circle = L.circle([coords.latitude, coords.longitude], {
+            color: 'red',
+            fillColor: '#f03',
+            fillOpacity: 0.5,
+            radius: 800,
+        }).addTo(map);
+        circle.bindPopup("PSI 24HR Readings : " + region[i]);
+    }
 })
