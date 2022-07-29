@@ -4,74 +4,29 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSC3007-ASSIGNMENT3</title>
+    <title>CSC3007-ASSIGNMENT5</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.8.0/leaflet.css" />
     <style>
-        div.tooltip {   
-            position: absolute;                
-            width: 80px;                    
-            height: 50px;                   
-            padding: 2px;               
-            font: 12px sans-serif;      
-            background: white; 
-            border: 0px;        
-            border-radius: 4px;         
-            pointer-events: none;           
-        }
-
-        body {
-            background-color: #DDDDDD;
-        }
-        #gender-btn{
-            display: block;
-            width: 100%;
-            text-align: right;
-            margin-top: 10px;
-            padding-right: 20px;
-        }
-        text{
-            font-size: 7px;
-        }
-        #viz{
-            margin: auto;
-            display: block;
-        }
-        #legend{
-            width: 45%;
-            display: inline-block;
-        }
-        span{
-            margin-top: 0px;
-            margin-left: 300px;
-            width: 200px;
-            padding: 10px;
-            display: inline-block; /* or block */
-            /* demo */
-            background: white;
-            text-align: center;
-            border-radius: 3px;
-            font-weight: bold;
-        }
+    #map {
+    width: 1000px;
+    height: 600px;
+    }
     </style>
+     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
+     integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
+     crossorigin=""/>
 </head>
 <body>
-    <div class="btn-group btn-group-toggle" data-toggle="buttons"  id="gender-btn">
-        <label class="btn btn-outline-primary active">
-          <input type="radio" id="male" autocomplete="off" checked> Male
-        </label>
-        <label class="btn btn-outline-primary">
-          <input type="radio" id="female" autocomplete="off"> Female
-        </label>
-      </div>
-    <svg id="viz"></svg>
-    <div id ="legend"><svg id="legends"></svg></div>
-    <span class="border border-primary">WAIT FOR IT TO LOAD</span>
-    <div class="tooltip"></div>
+    <div id="map"></div>
     <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.8.0/leaflet.js"></script>
     <script src="js/app.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ==" crossorigin=""></script>
+
 </body>
 </html>
